@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
-const mousePosition = ({ render }) => {
+const MousePosition = ({ render }) => {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -9,9 +9,7 @@ const mousePosition = ({ render }) => {
 
   useEffect(() => {
     const handleMousePositionChange = (e) => {
-     
-      // Use e.clientX and e.clientY to access the mouse position on the screen
-      setMousePosition = ({
+      setMousePosition({
         x: e.clientX,
         y: e.clientY,
       });
@@ -24,40 +22,35 @@ const mousePosition = ({ render }) => {
     };
   }, []);
 
-  // What should be returned here?
-  return render({ mousePosition});
+  return render({ mousePosition });
 };
 
-// This component should not receive any props
 const PanelMouseLogger = () => {
-  // The below if statement can be removed after the render props pattern is implemented
-    return (
+  return (
     <div className="BasicTracker">
       <p>Mouse position:</p>
-      <mousePosition
-       render={({mousePosition}) => (
-        <div className="Row">
-        <span>x: {mousePosition.x}</span>
-        <span>y: {mousePosition.y}</span>
-        </div>
-       )}
+      <MousePosition
+        render={({ mousePosition }) => (
+          <div className="Row">
+            <span>x: {mousePosition.x}</span>
+            <span>y: {mousePosition.y}</span>
+          </div>
+        )}
       />
     </div>
   );
 };
 
-// This component should not receive any props
 const PointMouseLogger = () => {
-  // The below if statement can be removed after the render props pattern is implemented
   return (
-    <mousePosition
-      render={({mousePosition}) => (
+    <MousePosition
+      render={({ mousePosition }) => (
         <p>
           ({mousePosition.x}, {mousePosition.y})
         </p>
       )}
     />
-  ); 
+  );
 };
 
 function App() {
