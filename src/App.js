@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
-const handleMousePositionChange = ({ render }) => {
+const mousePosition = ({ render }) => {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -47,16 +47,17 @@ const PanelMouseLogger = () => {
 };
 
 // This component should not receive any props
-const PointMouseLogger = ({mousePosition}) => {
+const PointMouseLogger = () => {
   // The below if statement can be removed after the render props pattern is implemented
-  if (!mousePosition) {
-    return null;
-  }
   return (
-    <p>
-      ({mousePosition.x}, {mousePosition.y})
-    </p>
-  )
+    <mousePosition
+      render={({mousePosition}) => (
+        <p>
+          ({mousePosition.x}, {mousePosition.y})
+        </p>
+      )}
+    />
+  ); 
 };
 
 function App() {
