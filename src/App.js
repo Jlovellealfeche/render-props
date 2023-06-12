@@ -1,11 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
-const MousePosition = ({ render }) => {
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
+const handleMousePositionChange = (e) => {
+   setMousePosition({
+    x: e.clientX,
+    y: e.clientY,
   });
+};
 
   useEffect(() => {
     const handleMousePositionChange = (e) => {
