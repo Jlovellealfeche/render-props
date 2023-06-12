@@ -1,16 +1,20 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 
-const handleMousePositionChange = (e) => {
-   setMousePosition({
-    x: e.clientX,
-    y: e.clientY,
+const handleMousePositionChange = ({ render }) => {
+  const [mousePosition, setMousePosition] = useState({
+    x: 0,
+    y: 0,
   });
-};
 
   useEffect(() => {
     const handleMousePositionChange = (e) => {
+     
       // Use e.clientX and e.clientY to access the mouse position on the screen
+      setMousePosition = ({
+        x: e.clientX,
+        y: e.clientY,
+      });
     };
 
     window.addEventListener("mousemove", handleMousePositionChange);
@@ -21,22 +25,23 @@ const handleMousePositionChange = (e) => {
   }, []);
 
   // What should be returned here?
-  return null;
+  return render({ mousePosition});
 };
 
 // This component should not receive any props
-const PanelMouseLogger = ({mousePosition}) => {
+const PanelMouseLogger = () => {
   // The below if statement can be removed after the render props pattern is implemented
-  if (!mousePosition) {
-    return null;
-  }
-  return (
+    return (
     <div className="BasicTracker">
       <p>Mouse position:</p>
-      <div className="Row">
+      <mousePosition
+       render={({mousePosition}) => (
+        <div className="Row">
         <span>x: {mousePosition.x}</span>
         <span>y: {mousePosition.y}</span>
-      </div>
+        </div>
+       )}
+      />
     </div>
   );
 };
